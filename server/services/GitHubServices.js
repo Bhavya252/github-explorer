@@ -1,20 +1,45 @@
 import axios from "axios";
 
+export const fetchGitHubUser = async (username) => {
+  try {
+    const profileResponse = await axios.get(
+      `https://api.github.com/users/${username}`,
+    );
+    const reposResponse = await axios.get(
+      `https://api.github.com/users/${username}/repos`,
+    );
 
- export const fetchGitHubUser = async(username) =>{
-    try{
+    const profileData = profileResponse.data;
 
-        const profileResponse = await axios.get(`https://api.github.com/users/${username}`);
-        const reposResponse = await axios.get(`https://api.github.com/users/${username}/repos`);
+    const formattedProfile = {
+      username: profileData.login,
+      name: profileData.name,
+      avatar: profileData.avatar_url,
+      bio: profileData.bio,
+      followers: profileData.followers,
+      following: profileData.following,
+      publicRepos: profileData.public_repos,
+      githubProfileUrl: profileData.html_url,
+    };
 
-        return {
-            profile: profileResponse.data,
-            repositories: reposResponse.data
-        };
+    const formattedRepositories = reposResponse.data.map((repo) => {
+      return {
+        id: repo.id,
+        name: repo.name,
+        description: repo.description,
+        stars: repo.stargazers_count,
+        forks: repo.forks_count,
+        language: repo.language,
+        updatedAt: repo.updated_at,
+        repoUrl: repo.html_url,
+      };
+    });
 
-    }
-    catch(err){
-        throw new Error("Error fetching GitHub user data: " + err.message);
-    }
-}
-
+    return {
+      profile: formattedProfile,
+      repositories: formattedRepositories,
+    };
+  } catch (err) {
+    throw new Error("Error fetching GitHub user data: " + err.message);
+  }
+};
