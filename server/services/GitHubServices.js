@@ -1,7 +1,21 @@
 import axios from "axios";
+import cache from "../cache/MemoryCache.js";
 
 export const fetchGitHubUser = async (username) => {
   try {
+     const cachedUser = cache[username];
+
+    if (
+      cachedUser &&
+      Date.now() - cachedUser.timestamp < 60000
+    ) {
+      console.log("Serving from cache");
+
+      return cachedUser.data;
+    }
+
+
+
     const profileResponse = await axios.get(
       `https://api.github.com/users/${username}`,
     );
@@ -35,10 +49,18 @@ export const fetchGitHubUser = async (username) => {
       };
     });
 
-    return {
+    const finalData = {
       profile: formattedProfile,
       repositories: formattedRepositories,
     };
+
+
+    cache[username] = {
+      data: finalData,
+      timestamp: Date.now(),
+    };
+
+    return finalData;
   } catch (err) {
     throw new Error("Error fetching GitHub user data: " + err.message);
   }
