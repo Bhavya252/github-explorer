@@ -1,7 +1,7 @@
 import axios from "axios";
 import cache from "../cache/MemoryCache.js";
 
-export const fetchGitHubUser = async (username) => {
+export const fetchGitHubUser = async (username , page) => {
   try {
      const cachedUser = cache[username];
 
@@ -19,9 +19,9 @@ export const fetchGitHubUser = async (username) => {
     const profileResponse = await axios.get(
       `https://api.github.com/users/${username}`,
     );
-    const reposResponse = await axios.get(
-      `https://api.github.com/users/${username}/repos`,
-    );
+    const reposResponse = axios.get(
+  `https://api.github.com/users/${username}/repos?page=${page}&per_page=10`
+)
 
     const profileData = profileResponse.data;
 

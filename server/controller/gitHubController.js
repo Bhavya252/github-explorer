@@ -6,8 +6,9 @@ export const getGitHubUser = async (req,res)=>{
     try{
 
         const { username } = req.params;
+        const page = req.query.page || 1;
 
-        const data = await fetchGitHubUser(username);
+        const data = await fetchGitHubUser(username,page);
 
         res.status(200).json(data);
 
