@@ -134,8 +134,7 @@ function App() {
         </h1>
 
         <p className="text-gray-400 text-lg mt-6 max-w-2xl mx-auto leading-relaxed">
-          Search profiles, repositories, and developer activity instantly with a
-          modern GitHub explorer dashboard.
+          Search GitHub developers and explore their repositories through a sleek modern dashboard.
         </p>
       </section>
 
@@ -159,10 +158,6 @@ function App() {
   );
 }
 
-<section className="max-w-7xl mx-auto px-6 pb-20">
-  <div className="flex items-center justify-between mb-8">
-    <h2 className="text-3xl font-bold">Repositories</h2>
-  </div>
-</section>;
+
 
 export default App;
