@@ -5,6 +5,7 @@ function RepoTitle({
   repositories,
   sortBy,
   setSortBy,
+    handleLoadMore,
 }) {
   return (
     <section className="max-w-7xl mx-auto px-6 pb-20">
@@ -31,6 +32,16 @@ function RepoTitle({
         ))}
 
       </div>
+      <div className="flex justify-center mt-12">
+
+  <button
+    onClick={handleLoadMore}
+    className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl font-semibold transition"
+  >
+    Load More
+  </button>
+
+</div>
 
     </section>
   );

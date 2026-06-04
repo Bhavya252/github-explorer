@@ -1,26 +1,22 @@
 import axios from "axios";
 import cache from "../cache/MemoryCache.js";
 
-export const fetchGitHubUser = async (username , page) => {
+export const fetchGitHubUser = async (username, page) => {
   try {
-     const cachedUser = cache[username];
+    const cacheKey = `${username}-${page}`;
+    const cachedUser = cache[cacheKey];
 
-    if (
-      cachedUser &&
-      Date.now() - cachedUser.timestamp < 60000
-    ) {
+    if (cachedUser && Date.now() - cachedUser.timestamp < 60000) {
       console.log("Serving from cache");
 
       return cachedUser.data;
     }
 
-
-
     const profileResponse = await axios.get(
       `https://api.github.com/users/${username}`,
     );
-   const reposResponse = await axios.get(
-  `https://api.github.com/users/${username}/repos?page=${page}&per_page=10`
+    const reposResponse = await axios.get(
+      `https://api.github.com/users/${username}/repos?page=${page}&per_page=10`,
     );
 
     const profileData = profileResponse.data;
@@ -54,12 +50,10 @@ export const fetchGitHubUser = async (username , page) => {
       repositories: formattedRepositories,
     };
 
-
-    cache[username] = {
+    cache[cacheKey] = {
       data: finalData,
       timestamp: Date.now(),
     };
-
     return finalData;
   } catch (err) {
     throw new Error("Error fetching GitHub user data: " + err.message);

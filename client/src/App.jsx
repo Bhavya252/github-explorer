@@ -16,7 +16,8 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
-
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true); 
   const sortedRepositories = [...repositories];
   if (sortBy === "stars") {
   sortedRepositories.sort(
@@ -38,26 +39,55 @@ if (sortBy === "updated") {
   );
 }
 
-  const handleSearch = async () => {
+ const handleSearch = async () => {
   try {
     setLoading(true);
 
     setError("");
 
+    setPage(1);
+
     const response = await axios.get(
-      `http://localhost:5000/api/github/${username}`
+      `http://localhost:5000/api/github/${username}?page=1`
     );
 
+    console.log(response.data);
+
     setProfile(response.data.profile);
-    console.log(profile);
 
     setRepositories(response.data.repositories);
-    console.log(repositories);
 
   } catch (err) {
     setError("User not found or something went wrong");
   } finally {
     setLoading(false);
+  }
+};
+
+const handleLoadMore = async () => {
+  try {
+    const nextPage = page + 1;
+
+    const response = await axios.get(
+      `http://localhost:5000/api/github/${username}?page=${nextPage}`
+    );
+
+    const newRepositories = response.data.repositories;
+
+    if (newRepositories.length === 0) {
+      setHasMore(false);
+      return;
+    }
+
+    setRepositories((prev) => [
+      ...prev,
+      ...newRepositories,
+    ]);
+
+    setPage(nextPage);
+
+  } catch (err) {
+    setError("Failed to load more repositories");
   }
 };
 
@@ -102,6 +132,7 @@ if (sortBy === "updated") {
   repositories={sortedRepositories}
   sortBy={sortBy}
   setSortBy={setSortBy}
+  handleLoadMore={handleLoadMore}
  />}
     </div>
   );
