@@ -56,7 +56,7 @@ function App() {
     setHasMore(true);
 
     const response = await axios.get(
-      `http://localhost:5000/api/github/${searchValue}?page=1`
+      `https://github-explorer-tl0l.onrender.com/api/github/${searchValue}?page=1`
     );
 
     setSearchedUser(searchValue);
@@ -101,7 +101,7 @@ function App() {
       const nextPage = page + 1;
 
       const response = await axios.get(
-        `http://localhost:5000/api/github/${searchedUser}?page=${nextPage}`,
+        `https://github-explorer-tl0l.onrender.com/api/github/${searchedUser}?page=${nextPage}`,
       );
 
       const newRepositories = response.data.repositories;
