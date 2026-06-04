@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Loader from "./components/Loader";
 import ProfileCard from "./components/ProfileCard";
 import RepoTitle from "./components/RepoTitle";
+import SortButton from "./components/SortButton";
 import axios from "axios";
 
 function App() {
@@ -10,10 +11,32 @@ function App() {
   const [profile, setProfile] = useState(null);
 
   const [repositories, setRepositories] = useState([]);
+  const [sortBy, setSortBy] = useState("stars");
 
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
+
+  const sortedRepositories = [...repositories];
+  if (sortBy === "stars") {
+  sortedRepositories.sort(
+    (a, b) => b.stars - a.stars
+  );
+}
+
+if (sortBy === "name") {
+  sortedRepositories.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+}
+
+if (sortBy === "updated") {
+  sortedRepositories.sort(
+    (a, b) =>
+      new Date(b.updatedAt) -
+      new Date(a.updatedAt)
+  );
+}
 
   const handleSearch = async () => {
   try {
@@ -48,7 +71,7 @@ function App() {
       
 
 
-      {/* HERO SECTION */}
+
 <section className="max-w-5xl mx-auto px-6 py-24 text-center">
 
   <h1 className="text-6xl font-bold leading-tight">
@@ -73,7 +96,13 @@ function App() {
   </div>
 )}
 {profile && <ProfileCard profile={profile} />}
-{repositories.length > 0 && <RepoTitle repositories={repositories} />}
+
+
+{repositories.length > 0 && <RepoTitle
+  repositories={sortedRepositories}
+  sortBy={sortBy}
+  setSortBy={setSortBy}
+ />}
     </div>
   );
 }
