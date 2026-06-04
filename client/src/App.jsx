@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import Loader from "./components/Loader";
 import axios from "axios";
 
 function App() {
@@ -62,6 +63,13 @@ function App() {
   </p>
 
 </section>
+
+{loading && <Loader />}
+{error && (
+  <div className="max-w-2xl mx-auto bg-red-500/10 border border-red-500 text-red-400 px-6 py-4 rounded-xl">
+    {error}
+  </div>
+)}
     </div>
   );
 }
