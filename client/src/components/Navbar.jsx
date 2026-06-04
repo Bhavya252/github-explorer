@@ -7,7 +7,7 @@ function Navbar({ username, setUsername, handleSearch, recentSearches }) {
 
   return (
     <nav className="border-b border-gray-800 sticky top-0 bg-[#0D1117]/80 backdrop-blur-md z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <FaGithub className="text-3xl text-blue-400" />
 
