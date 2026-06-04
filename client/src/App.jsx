@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Loader from "./components/Loader";
+import ProfileCard from "./components/ProfileCard";
 import axios from "axios";
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
     {error}
   </div>
 )}
+{profile && <ProfileCard profile={profile} />}
     </div>
   );
 }
