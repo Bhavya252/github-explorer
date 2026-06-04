@@ -9,7 +9,7 @@ function Navbar({
     <nav className="border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
 
-        {/* LEFT SIDE */}
+       
         <div className="flex items-center gap-3">
           <FaGithub className="text-3xl text-blue-400" />
 
@@ -18,7 +18,7 @@ function Navbar({
           </h1>
         </div>
 
-        {/* SEARCH BAR */}
+       
         <div className="flex items-center gap-3 flex-1 max-w-2xl">
 
           <input
@@ -37,7 +37,7 @@ function Navbar({
           </button>
         </div>
 
-        {/* RIGHT SIDE */}
+        
         <a
           href="https://github.com"
           target="_blank"

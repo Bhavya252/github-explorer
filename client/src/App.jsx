@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Loader from "./components/Loader";
 import ProfileCard from "./components/ProfileCard";
+import RepoTitle from "./components/RepoTitle";
 import axios from "axios";
 
 function App() {
@@ -72,8 +73,21 @@ function App() {
   </div>
 )}
 {profile && <ProfileCard profile={profile} />}
+{repositories.length > 0 && <RepoTitle repositories={repositories} />}
     </div>
   );
 }
+
+<section className="max-w-7xl mx-auto px-6 pb-20">
+
+  <div className="flex items-center justify-between mb-8">
+
+    <h2 className="text-3xl font-bold">
+      Repositories
+    </h2>
+
+  </div>
+
+</section>
 
 export default App;

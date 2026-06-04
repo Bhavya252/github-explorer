@@ -7,14 +7,14 @@ function ProfileCard({ profile }) {
 
     <div className="flex flex-col md:flex-row items-center gap-8">
 
-      {/* PROFILE IMAGE */}
+      
       <img
         src={profile.avatar}
         alt={profile.username}
         className="w-36 h-36 rounded-full border-4 border-blue-500"
       />
 
-      {/* PROFILE INFO */}
+     
       <div className="flex-1 text-center md:text-left">
 
         <h2 className="text-4xl font-bold">
@@ -29,7 +29,7 @@ function ProfileCard({ profile }) {
           {profile.bio}
         </p>
 
-        {/* STATS */}
+       
         <div className="flex flex-wrap gap-6 mt-6 justify-center md:justify-start">
 
           <div className="bg-[#0D1117] px-5 py-3 rounded-xl border border-gray-800">
