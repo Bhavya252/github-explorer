@@ -19,9 +19,9 @@ export const fetchGitHubUser = async (username , page) => {
     const profileResponse = await axios.get(
       `https://api.github.com/users/${username}`,
     );
-    const reposResponse = axios.get(
+   const reposResponse = await axios.get(
   `https://api.github.com/users/${username}/repos?page=${page}&per_page=10`
-)
+    );
 
     const profileData = profileResponse.data;
 
