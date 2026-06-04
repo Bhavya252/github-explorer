@@ -51,7 +51,7 @@ function Navbar({ username, setUsername, handleSearch, recentSearches }) {
 
  
   <button
-    onClick={()=>handleSearch}
+    onClick={()=>handleSearch()}
     className="bg-blue-500 hover:bg-blue-600 px-5 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition"
   >
     Search
