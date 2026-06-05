@@ -130,7 +130,9 @@ Example:
 
 ## Screenshots
 
-Add screenshots here after deployment.
+![Profile](./screenshots/Profile.png)
+
+![Search](./screenshots/Search.png)
 
 ---
 
