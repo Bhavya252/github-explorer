@@ -56,6 +56,8 @@ export const fetchGitHubUser = async (username, page) => {
     };
     return finalData;
   } catch (err) {
+
+    console.log(err.response?.data || err.message);
     throw new Error("Error fetching GitHub user data: " + err.message);
   }
 };
